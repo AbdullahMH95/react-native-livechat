@@ -57,7 +57,7 @@ export default class Chat extends React.Component {
           {/* <NavigationBar chatTitle={chatTitle} closeChat={closeChat} /> */}
           {this.props.customHeader ? this.props.customHeader : null}
           { isReconnecting && <Text style={styles.connectionStatus}>Reconnecting...</Text> }
-          {headerText && <Text style={styles.status}>{ headerText }</Text> }
+          {/* {headerText && <Text style={styles.status}>{ headerText }</Text> } */}
           <GiftedChat
             inverted={false}
             messages={messages}
