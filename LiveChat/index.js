@@ -18,7 +18,7 @@ export default class LiveChat extends Component {
     this.defineStyles();
 
     this.state = {
-      isChatOn: false,
+      isChatOn: true,
       protocol: 'lc2',
       messages: [],
       users: {},
