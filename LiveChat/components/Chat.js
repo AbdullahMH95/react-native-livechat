@@ -103,7 +103,7 @@ const styles = StyleSheet.create({
     width,
     height: '100%',
     position: 'absolute',
-    top: 0,
+    top: 50,
     left: 0,
     flexDirection: 'column',
     backgroundColor: '#fff',
@@ -135,8 +135,8 @@ const styles = StyleSheet.create({
   connectionStatus: {
     textAlign: 'center',
     fontWeight: '500',
-    color: '#000',
-    backgroundColor: '#edbe25',
+    color: '#fff',
+    backgroundColor: 'rgb(63, 42, 85)',
     padding: 10,
   }
 });
