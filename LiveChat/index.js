@@ -335,32 +335,32 @@ export default class LiveChat extends Component {
             chatId: chatsSummary[0].id,
             chatActive: chatsSummary[0].active,
           })
-          customerSDK.getChatHistory(chatsSummary[0].id).next().then((historyData) => {
-            const { value, done } = historyData
-            const newThreadEvents = value.map(thread => {
-              const { events } = thread
-              const newEvents = events.filter(({ id }) => !this.state.messages.some(_stateEvent => _stateEvent._id === id))
-              return {
-                events: newEvents,
+            customerSDK.getChatHistory(chatsSummary[0].id).next().then((historyData) => {
+              const { value, done } = historyData              
+              const newThreadEvents = value.map(thread => {
+                const { events } = thread
+                const newEvents = events.filter(({ id }) => !this.state.messages.some(_stateEvent => _stateEvent._id === id))
+                return {
+                  events: newEvents,
+                }
+              })
+              const eventsToAdd = newThreadEvents.reduce((acc, current) => {
+                return [
+                  ...acc,
+                  ...current.events,
+                ]
+              }, [])
+              if (!eventsToAdd) {
+                return
               }
+              const parsed = eventsToAdd.map(_event => lc3Parsers.parseEvent(_event, this.getUser(_event.author))).filter(Boolean)
+              this.setState({
+                messages: [
+                  ...parsed,
+                  ...this.state.messages,
+                ]
+              })
             })
-            const eventsToAdd = newThreadEvents.reduce((acc, current) => {
-              return [
-                ...acc,
-                ...current.events,
-              ]
-            }, [])
-            if (!eventsToAdd) {
-              return
-            }
-            const parsed = eventsToAdd.map(_event => lc3Parsers.parseEvent(_event, this.getUser(_event.author))).filter(Boolean)
-            this.setState({
-              messages: [
-                ...parsed,
-                ...this.state.messages,
-              ]
-            })
-          })
         }
       })
       
@@ -434,13 +434,13 @@ export default class LiveChat extends Component {
     const { isChatOn } = this.state;
 
     return [
-      <ChatBubble
-        key="bubble"
-        openChat={this.openChat}
-        bubble={this.state.bubble}
-        disabled={this.props.movable}
-        styles={this.props.bubbleStyles}
-      />,
+      // <ChatBubble
+      //   key="bubble"
+      //   openChat={this.openChat}
+      //   bubble={this.state.bubble}
+      //   disabled={this.props.movable}
+      //   styles={this.props.bubbleStyles}
+      // />,
       this.visitorSDK && <Chat
         key="chat"
         {...this.props}

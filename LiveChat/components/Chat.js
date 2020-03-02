@@ -57,7 +57,7 @@ export default class Chat extends React.Component {
           {/* <NavigationBar chatTitle={chatTitle} closeChat={closeChat} /> */}
           {this.props.customHeader ? this.props.customHeader : null}
           { isReconnecting && <Text style={styles.connectionStatus}>Reconnecting...</Text> }
-          {/* {headerText && <Text style={styles.status}>{ headerText }</Text> } */}
+          {headerText && <Text style={styles.status}>{ headerText }</Text> }
           <GiftedChat
             inverted={false}
             messages={messages}
@@ -102,9 +102,9 @@ const styles = StyleSheet.create({
   container: {
     width,
     height: '100%',
-    position: 'absolute',
-    top: 50,
-    left: 0,
+    // position: 'absolute',
+    // top: 50,
+    // left: 0,
     flexDirection: 'column',
     backgroundColor: '#fff',
   },
