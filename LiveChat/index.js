@@ -150,6 +150,7 @@ export default class LiveChat extends Component {
           chatId: chat.chat,
           chatActive: true,
         })
+        this.props.getChatID(chat.chat);
       })
     }
     if (!this.state.chatActive) {
@@ -273,6 +274,7 @@ export default class LiveChat extends Component {
     }
     const customerSDK = CustomerSdkInit(config);
     this.customerSDK = customerSDK
+    this.props.customerSDK(customerSDK);
     customerSDK.on("new_event", ({event}) => {
       const hasEvent = this.state.messages.some(_stateEvent => _stateEvent._id === event.id || _stateEvent._id === event.customId)
       if (hasEvent) { 
@@ -335,6 +337,7 @@ export default class LiveChat extends Component {
             chatId: chatsSummary[0].id,
             chatActive: chatsSummary[0].active,
           })
+            this.props.getChatID(chatsSummary[0].id);
             customerSDK.getChatHistory(chatsSummary[0].id).next().then((historyData) => {
               const { value, done } = historyData              
               const newThreadEvents = value.map(thread => {
